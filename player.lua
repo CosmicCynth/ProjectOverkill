@@ -7,7 +7,7 @@ function player.load()
     player.height = 64
     player.speed = 200
     player.jumpForce = -500
-    player.jumpCD = 100
+    player.canJump = true
 
     player.gravity = 10
     player.acceleration = 0
@@ -27,12 +27,18 @@ function player.update(dt)
         player.acceleration = 0
     end
     print("player acc:"..player.acceleration)
-    
 
-    if love.keyboard.isDown("space") and player.jumpCD >= 100 then
-        player.jumpCD = 0
+    --Jumping
+    if checkAABB(player,floor) then
+        player.acceleration = 0
+        player.canJump = true
+    end
+
+    if love.keyboard.isDown("space") and player.canJump == true then
+        player.canJump = false
         player.acceleration = player.acceleration + player.jumpForce * dt
     end
+
     --Player updating
     player.y = player.y + player.acceleration
 end
