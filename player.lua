@@ -26,7 +26,7 @@ function player.update(dt)
     if player.y >= 600-player.height then
         player.acceleration = 0
     end
-    print("player acc:"..player.acceleration)
+    print("player acceleration:"..player.acceleration)
 
     --Jumping
     if checkAABB(player,floor) then
@@ -39,7 +39,9 @@ function player.update(dt)
         player.acceleration = player.acceleration + player.jumpForce * dt
     end
 
-    --if not love.keyboard.isDown("space") and player.acceleration 
+    if not love.keyboard.isDown("space") and player.acceleration < 0 then
+        player.acceleration = 0
+    end
 
     --Player updating
     player.y = player.y + player.acceleration
