@@ -39,6 +39,8 @@ function player.update(dt)
         player.acceleration = player.acceleration + player.jumpForce * dt
     end
 
+    --if not love.keyboard.isDown("space") and player.acceleration 
+
     --Player updating
     player.y = player.y + player.acceleration
 end
